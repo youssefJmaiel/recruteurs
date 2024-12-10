@@ -1,0 +1,21 @@
+<form method="get">
+    <input type="text" name="q" placeholder="Recherche par mot-clé" value="{{ request.GET.q }}">
+    <input type="text" name="user" placeholder="Utilisateur" value="{{ request.GET.user }}">
+    <input type="date" name="date_from" value="{{ request.GET.date_from }}">
+    <input type="date" name="date_to" value="{{ request.GET.date_to }}">
+    <button type="submit">Rechercher</button>
+</form>
+
+<ul>
+    {% if request.user.is_superuser %}
+    <p>Vous êtes connecté en tant qu'administrateur. Vous pouvez voir et rechercher dans tous les CV.</p>
+    {% else %}
+    <p>Vous ne pouvez voir que vos propres CV.</p>
+    {% endif %}
+
+    {% for cv in cvs %}
+    <li>{{ cv.title }} - {{ cv.user.username }} ({{ cv.date_uploaded }})
+        <a href="{{ cv.cv_file.url }}" download>Télécharger</a>
+    </li>
+    {% endfor %}
+</ul>

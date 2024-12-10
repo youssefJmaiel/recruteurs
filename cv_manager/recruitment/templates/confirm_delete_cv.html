@@ -1,0 +1,7 @@
+<h1>Supprimer le CV</h1>
+<p>Êtes-vous sûr de vouloir supprimer le CV intitulé "{{ cv.title }}" ? Cette action est irréversible.</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmer</button>
+    <a href="{% url 'cv_list' %}">Annuler</a>
+</form>

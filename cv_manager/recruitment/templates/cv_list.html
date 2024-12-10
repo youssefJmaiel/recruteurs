@@ -1,0 +1,57 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Uploaded CVs</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Uploaded CVs</h1>-->
+
+<!--{% if cvs %}-->
+<!--<ul>-->
+<!--    {% for cv in cvs %}-->
+<!--    <li>-->
+<!--        {{ cv.user.username }} - -->
+<!--        {% if cv.cv_file %}-->
+<!--        <a href="{{ cv.cv_file.url }}" download>Download CV</a>-->
+<!--        {% else %}-->
+<!--        No CV uploaded-->
+<!--        {% endif %}-->
+<!--    </li>-->
+<!--    {% endfor %}-->
+<!--</ul>-->
+<!--{% else %}-->
+<!--<p>No CVs uploaded yet.</p>-->
+<!--{% endif %}-->
+<!--</body>-->
+<!--</html>-->
+<!--<h1>Mes CVs</h1>-->
+<!--{% if cvs %}-->
+<!--<ul>-->
+<!--    {% for cv in cvs %}-->
+<!--    <li>-->
+<!--        {{ cv.user.username }} - -->
+<!--        <a href="{{ cv.cv_file.url }}" download>Download CV</a>-->
+<!--    </li>-->
+<!--    {% endfor %}-->
+<!--</ul>-->
+<!--{% else %}-->
+<!--<p>Aucun CV téléchargé.</p>-->
+<!--{% endif %}-->
+<h1>Mes CVs</h1>
+{% if cvs %}
+<ul>
+    {% for cv in cvs %}
+    <li>
+        {{ cv.user.username }} -
+        <a href="{{ cv.cv_file.url }}" download>Download CV</a>
+        <a href="{% url 'edit_cv' cv.id %}">Modifier</a> |
+
+        <a href="{% url 'delete_cv' cv.id %}" onclick="return confirm('Voulez-vous vraiment supprimer ce CV ?');">Supprimer</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Aucun CV téléchargé.</p>
+{% endif %}
